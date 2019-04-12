@@ -3,7 +3,7 @@
 //
 //  Demonstrates recursion.
 //********************************************************************
-public class MazeSearch
+public class MazeSearchNoSave
 {
    //-----------------------------------------------------------------
    //  Creates a new maze, prints its original form, tries to
@@ -11,15 +11,11 @@ public class MazeSearch
    //-----------------------------------------------------------------
    public static void main (String[] args)
    {
-      Maze labyrinth = new Maze(10, 20);
    
-      int counter = 0;
-      while(!labyrinth.traverse(0, 0)) {
-          counter++;
-          labyrinth = new Maze(10, 20);
+      MazeNoSave labyrinth = new MazeNoSave(10, 10);
+       System.out.println(labyrinth);
+      if(labyrinth.traverse(0, 0)) {
+          System.out.println("Found solution.");
       }
-      System.out.println("Found solution. Attempts: " + counter);
-      System.out.println(labyrinth);
-
    }
 }

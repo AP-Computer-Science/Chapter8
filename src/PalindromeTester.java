@@ -9,9 +9,6 @@ public class PalindromeTester {
         System.out.println(isPalindrome("sam"));
     }
     private static boolean isPalindrome(String word) {
-        //racecar
-        //bob
-        //eye
         if(word.length() <= 1) return true;
         if(word.charAt(0) == word.charAt(word.length() - 1)) {
             return isPalindrome(word.substring(1, word.length() - 1));
