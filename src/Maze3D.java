@@ -7,15 +7,16 @@
 
 public class Maze3D
 {
-   private final int TRIED = 3;
-   private final int PATH = 7;
+   private final String TRIED = "\u20DD";
+   private final String PATH = "\u235F";
 
-   private int[][][] grid = new int[5][8][1];
-   public Maze3D() {
+   private String[][][] grid;
+   public Maze3D(int ar, int ac, int al) {
+       grid = new String[ar][ac][al];
        for(int r = 0; r < grid.length; r++)
-           for(int c = 0; c < grid[0].length; r++)
+           for(int c = 0; c < grid[0].length; c++)
                for(int l = 0; l < grid[0][0].length; l++) {
-                   grid[r][c][l] = (int)(Math.random() * 2);
+                   grid[r][c][l] = ((int)(Math.random() * 2) == 0) ? "\u25a0" : "\u25a1";
                }
    }
 
@@ -44,6 +45,9 @@ public class Maze3D
             if (!done)
                done = traverse (row, column-1, level);  // left
             if (!done) {
+                done = traverse(row, column, level + 1); // Up a level
+            }
+            if(!done) {
                 done = traverse(row, column, level - 1); // Down a level
             }
          }
@@ -68,7 +72,7 @@ public class Maze3D
           level >= 0 && level < grid[row][column].length)
 
          //  check if cell is not blocked and not previously tried
-         if (grid[row][column][level] == 1)
+         if (grid[row][column][level] == "\u25a1")
             result = true;
 
       return result;
@@ -79,18 +83,24 @@ public class Maze3D
    //-----------------------------------------------------------------
    public String toString ()
    {
-      String result = "\n";
+      String result = "";
+      for(int i = 0; i < grid[0][0].length; i++) {
+          result += generateMazeByLevel(i);
+      }
+      result += "\t\t";
 
+      return result;
+   }
+   public String generateMazeByLevel(int level) {
+      String result = "\n";
+      result += "Level " + level + "\n\n";
       for (int row=0; row < grid.length; row++)
       {
          for (int column=0; column < grid[row].length; column++) {
-            for(int level=0; level < grid[row][column].length; level++) {
-                result += grid[row][column][level] + "";
-            }
+            result += grid[row][column][level] + "";
          }
          result += "\n";
       }
-
       return result;
    }
 }

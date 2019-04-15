@@ -13,12 +13,11 @@ public class Blurb {
         whatzits.add(w);
     }
     public String toString() {
-        return whoozit + iterateWhatzit(0);
-    }
-    public String iterateWhatzit(int pos) {
-        if(pos < whatzits.size()) return "";
-        else {
-            return whatzits.get(pos) + iterateWhatzit(pos + 1);
+        String result = "";
+        result += whoozit;
+        for(String w : whatzits) {
+            result += w;
         }
+        return result;
     }
 }

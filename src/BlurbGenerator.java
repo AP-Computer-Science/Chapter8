@@ -20,8 +20,13 @@ public class BlurbGenerator {
     public Blurb generateRandomBlurb() {
         String whoozit = generateWhoozit((int)(Math.random() * 5) + 1, true);
         Blurb b = new Blurb(whoozit);
-        b.addWhatzit(generateWhatzit(2, true, whoozit));
+        addWhatzit((int)(Math.random() * 5) + 1, b, whoozit);
         return b;
+    }
+    private void addWhatzit(int count, Blurb b, String w) {
+        if(count == 0) return;
+        b.addWhatzit(generateWhatzit(1, true, w));
+        addWhatzit(count - 1, b, w);
     }
     private String generateYs() {
         return "y";
